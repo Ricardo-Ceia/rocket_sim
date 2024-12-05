@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>SPACESHIP SIM</title>
+    <style>
+        body{
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        text-align: center;
+        overflow: hidden;
+        margin: 0;
+    }
+
+    #rocketship{
+        position: absolute;
+        width: 50px;
+        height: 100px;
+        background: url('./rocketship.png') no-repeat center/contain; /* Replace with your rocket image */
+        bottom: 0; /* Start from the bottom */
+        left: 50%;
+        transform: translateX(-50%); 
+    }
+    </style>
+</head>
+<body>
+    <div class="rocketship" id="rocketship"></div>
+</body>
+<script src="./script.js"></script>
+</html>
