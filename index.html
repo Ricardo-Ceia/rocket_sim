@@ -29,5 +29,32 @@
 <body>
     <div class="rocketship" id="rocketship"></div>
 </body>
-<script src="./script.js"></script>
+<script >
+    /*
+    Lets say that 2 meters is 1 pixel so the height_in_px = height/100 
+    */
+    // Create WebSocket connection.
+    const socket = new WebSocket("ws://localhost:65432");
+    //console.log(socket)
+    const meters_per_pixel = 2
+
+    const rocket = document.getElementById("rocketship")
+    console.log("rocket:",rocket)
+    //Signal on Connection
+    socket.onopen = ()=>{
+        console.log("Connected to Websocket Server");
+    } 
+
+
+    // Listen for messages
+    socket.addEventListener("message", (event) => {
+        const height = parseFloat(event.data)
+        console.log("height:",height)
+        if(!isNaN(height)){
+            console.log("Enter in if")
+            const rocketship_position = Math.round(height/meters_per_pixel)
+            rocket.style.bottom = `${rocketship_position}px`
+        }
+    });
+</script>
 </html>

@@ -31,7 +31,7 @@ def calc_height():
     for i in range(run_time):
         h_t = 0+0+1/2*a*pow(i,2)
         print(f"ALTITUDE IN METERS {h_t}")
-        h_t_array.append(str(h_t).encode())             
+        h_t_array.append(str(h_t))             
     return h_t_array
 
 async def send_height(websocket):
