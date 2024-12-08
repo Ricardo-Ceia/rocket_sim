@@ -39,6 +39,7 @@ async def send_height(websocket):
     for h_t in h_t_array:
         await websocket.send(h_t)
         time.sleep(1)
+    await websocket.send("END")
     
 async def main():
     async with serve(send_height,"localhost",65432):

@@ -24,10 +24,35 @@
         left: 50%;
         transform: translateX(-50%); 
     }
+
+    #height_display{
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        text-align: center;
+        color: antiquewhite;
+    }
+    #Max_height_reached{
+        display: none;
+        position:fixed;
+        color:antiquewhite;
+        font-size: large;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 20px;
+        top: 50%;
+        left: 43%;
+
+    }
     </style>
 </head>
 <body>
+    <div class="height_display" id="height_display">
+        height: 0 meters
+    </div>
     <div class="rocketship" id="rocketship"></div>
+    <div class="Max_height_reached" id="Max_height_reached">
+        Max height reached ✅
+    </div>
 </body>
 <script >
     /*
@@ -38,8 +63,14 @@
     //console.log(socket)
     const meters_per_pixel = 2
 
+    const screenHeight = window.innerHeight
+
     const rocket = document.getElementById("rocketship")
-    console.log("rocket:",rocket)
+    const height_display = document.getElementById("height_display")
+    const Max_height_reached = document.getElementById("Max_height_reached")
+
+    console.log("Height_display:",height_display)
+
     //Signal on Connection
     socket.onopen = ()=>{
         console.log("Connected to Websocket Server");
@@ -53,7 +84,15 @@
         if(!isNaN(height)){
             console.log("Enter in if")
             const rocketship_position = Math.round(height/meters_per_pixel)
-            rocket.style.bottom = `${rocketship_position}px`
+            
+            console.log("rocketship_position:",rocketship_position)
+            
+            const constrained_height = Math.min(height,screenHeight-rocket.offsetHeight)
+            height_display.textContent = `Height: ${Math.round(height)} meters`
+            rocket.style.bottom = `${constrained_height}px`
+        }
+        if(event.data==="END"){
+            Max_height_reached.style.display = "block";
         }
     });
 </script>
